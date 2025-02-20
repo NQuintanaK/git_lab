@@ -173,4 +173,8 @@ function sortDescending(arr) { //recibe un array
     return arr.sort((a, b) => b - a); //ordena el array de manera descendente
 }
 
+<<<<<<< HEAD
 console.log(sortDescending([56, 39, 86, 43, 28, 90, 12, 75, 67, 34]));
+=======
+console.log(sortDescending([56, 39, 86, 43, 28, 90, 12, 75, 67, 34]));
+>>>>>>> cd40a754881caa61b7c6cd054f357f7483f44696
