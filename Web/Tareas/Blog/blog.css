@@ -1,0 +1,32 @@
+*{
+    background-color: aqua;
+}
+
+
+body {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+body table td{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    justify-content: center;
+    background-color: white;
+}
+
+
+
+footer {
+    text-align: center;
+    background-color: green;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
