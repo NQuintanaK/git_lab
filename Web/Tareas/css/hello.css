@@ -1,0 +1,32 @@
+* {
+    margin: 10px;
+}
+
+h1 {
+    color: black;
+    padding: 15px;
+    margin: 10px;
+}
+
+body {
+    border : red 1px solid;
+    padding: 20px;
+    margin: 0px
+}
+
+nav {
+    border: green 2px solid;
+    padding: 10px;
+    margin: 10px;
+}
+
+
+footer {
+    border: yellow 2px solid;
+}
+
+footer p{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+}

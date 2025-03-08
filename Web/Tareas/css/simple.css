@@ -1,0 +1,73 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    background-color: gray;
+}
+
+header nav {
+    display: flex;
+    margin: 18.72px;
+}
+
+header nav a {
+    color: white;
+    margin: 0 10px;
+}
+
+#subscribe_section {
+    display: flex;
+    justify-content: center;
+    background-color: gray;
+    color: white;
+}
+
+#subscribe_section form {
+    margin: 16px;
+    color: white;
+}
+
+#subscribe_section button {
+    background-color: orange;
+    color: white;
+}
+
+#image_section {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#image_section div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+}
+
+#header h1 {
+    display: flex;;
+    text-align: center;
+}
+
+#header p {
+    display: flex;
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    background-color: gray;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px;
+    background-color: goldenrod;
+}
