@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos y DOM</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>Eventos y DOM</h1>
+
+    <div class="container">
+        <h2>Preguntas y Respuestas</h2>
+        <ol>
+            <li><b>¿Qué es el DOM?</b>  
+                <p>El <b>DOM (Document Object Model)</b> es la representación en memoria de una página web que permite manipular sus elementos con JavaScript.</p>
+            </li>
+            <li><b>¿Qué es un nodo?</b>  
+                <p>Un <b>nodo</b> es cualquier elemento del DOM, incluyendo etiquetas HTML, atributos o texto dentro de un elemento.</p>
+            </li>
+            <li><b>¿Cómo se accede a un elemento del DOM?</b>  
+                <p>Se puede acceder con `getElementById()`, `querySelector()` y otros métodos.</p>
+            </li>
+            <li><b>¿Cómo se modifica un elemento del DOM?</b>  
+                <p>Podemos cambiar su contenido con `textContent` o su estilo con `style`.</p>
+            </li>
+            <li><b>¿Cuál es la diferencia entre getElementBy* y querySelector*?</b>  
+                <p>`getElementById()` selecciona por ID, `querySelector()` usa selectores CSS.</p>
+            </li>
+            <li><b>¿Qué es un evento?</b>  
+                <p>Un evento es una acción del usuario como un clic o presionar una tecla.</p>
+            </li>
+            <li><b>¿Qué es un listener?</b>  
+                <p>Un listener es una función que se ejecuta cuando ocurre un evento.</p>
+            </li>
+            <li><b>¿Qué es un callback?</b>  
+                <p>Un callback es una función que se pasa como argumento y se ejecuta más tarde.</p>
+            </li>
+            <li><b>¿Qué es un objeto de evento?</b>  
+                <p>Es un objeto que contiene información sobre el evento, como su tipo y posición.</p>
+            </li>
+        </ol>
+    </div>
+
+    <div class="container">
+        <h2>Ejercicios de Código</h2>
+        
+        <h3>1. Posición del mouse</h3>
+        <p id="mousePosition">Posición del mouse: </p>
+
+        <h3>2. Formulario de Nombre Completo</h3>
+        <form id="form1">
+            <label>Nombre: <input id="form-fname" type="text"></label>
+            <label>Apellido: <input id="form-lname" type="text"></label>
+            <input id="form1-submit" type="submit" value="Enviar">
+        </form>
+
+        <h3>3. Insertar filas y columnas</h3>
+        <table id="sampleTable">
+            <tr><td>Fila 1 Col 1</td><td>Fila 1 Col 2</td></tr>
+            <tr><td>Fila 2 Col 1</td><td>Fila 2 Col 2</td></tr>
+        </table>
+        <button id="btn-insert-r">Agregar Fila</button>
+        <button id="btn-insert-c">Agregar Columna</button>
+
+        <h3>4. Modificar celda de tabla</h3>
+        <table id="myTable">
+            <tr><td>1,1</td><td>1,2</td></tr>
+            <tr><td>2,1</td><td>2,2</td></tr>
+        </table>
+        <input id="rowIndex" type="text" placeholder="Fila">
+        <input id="colIndex" type="text" placeholder="Columna">
+        <input id="newValue" type="text" placeholder="Nuevo valor">
+        <button id="btn-change">Actualizar</button>
+
+        <h3>5. Lista de Colores</h3>
+        <select id="colorSelect">
+            <option>Rojo</option>
+            <option>Verde</option>
+            <option>Azul</option>
+        </select>
+        <button id="btn-add-color">Agregar Color</button>
+        <button id="btn-rmv-color">Eliminar Color</button>
+
+    <script>
+        // Mostrar la posición del mouse
+        document.addEventListener("mousemove", function(event) {
+            document.getElementById("mousePosition").textContent = `Posición del mouse: X=${event.clientX}, Y=${event.clientY}`;
+        });
+
+        // Formulario de nombre completo
+        document.getElementById('form1').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let nombre = document.getElementById('form-fname').value;
+            let apellido = document.getElementById('form-lname').value;
+            let resultado = document.createElement('p');
+            resultado.textContent = `Nombre completo: ${nombre} ${apellido}`;
+            this.appendChild(resultado);
+        });
+
+        // Agregar filas y columnas a la tabla
+        document.getElementById('btn-insert-r').addEventListener('click', function() {
+            let table = document.getElementById('sampleTable');
+            let row = table.insertRow();
+            for (let i = 0; i < table.rows[0].cells.length; i++) {
+                row.insertCell().textContent = `Nueva Fila`;
+            }
+        });
+
+        document.getElementById('btn-insert-c').addEventListener('click', function() {
+            let table = document.getElementById('sampleTable');
+            for (let row of table.rows) {
+                row.insertCell().textContent = `Nueva Columna`;
+            }
+        });
+
+        // Modificar celda de tabla
+        document.getElementById('btn-change').addEventListener('click', function() {
+            let row = document.getElementById('rowIndex').value - 1;
+            let col = document.getElementById('colIndex').value - 1;
+            let value = document.getElementById('newValue').value;
+            let table = document.getElementById('myTable');
+
+            if (table.rows[row] && table.rows[row].cells[col]) {
+                table.rows[row].cells[col].textContent = value;
+            }
+        });
+
+        // Lista de colores
+        document.getElementById('btn-add-color').addEventListener('click', function() {
+            let option = document.createElement('option');
+            option.textContent = `Color Nuevo`;
+            document.getElementById('colorSelect').appendChild(option);
+        });
+
+        document.getElementById('btn-rmv-color').addEventListener('click', function() {
+            let select = document.getElementById('colorSelect');
+            select.remove(select.selectedIndex);
+        });
+
+        // Imagen con tamaño aleatorio
+        document.getElementById('imagenGato').addEventListener('mouseenter', function() {
+            this.src = `https://placekitten.com/${Math.floor(Math.random() * 300 + 300)}/${Math.floor(Math.random() * 300 + 300)}`;
+        });
+    </script>
+    <div class="container">
+        <p>6. Al poner el mouse encima de la siguiente imagen, genera dos números aleatorios entre 300 y 600 para el width y height de una imagen. Reemplaza la imagen de placeholder por otra similar con el tamaño random que generaste. El evento solo se dispara cuando el mouse entra en la imagen.</p>
+        <img id="imagenGato" src="http://placekitten.com/200/300" alt="Imagen de un gato">
+        <p id="dimensionesGato">Dimensiones actuales: 200x300</p>
+        <script>
+            /**
+             * Genera dimensiones estándar para imágenes de gatos
+             * @return {Object} Objeto con dimensiones estándar de ancho y alto
+             */
+            function getStandardDimensions() {
+                // Formatos estándar que funcionan mejor con servicios de imágenes
+                const standardSizes = [200, 300, 400, 500];
+                
+                return {
+                    width: standardSizes[Math.floor(Math.random() * standardSizes.length)],
+                    height: standardSizes[Math.floor(Math.random() * standardSizes.length)]
+                };
+            }
+            
+            // Preparamos el estilo CSS para la transición suave
+            const imagenGato = document.getElementById('imagenGato');
+            imagenGato.style.transition = "all 0.5s ease";
+            
+            // Elemento para mostrar las dimensiones actuales
+            const dimensionesElement = document.getElementById('dimensionesGato');
+            
+            // Contador de eventos para evitar múltiples disparos
+            let isChanging = false;
+            
+            // Función para actualizar la imagen con tamaño aleatorio
+            function actualizarImagen() {
+                if (isChanging) return; // Evitar múltiples ejecuciones simultáneas
+                
+                isChanging = true;
+                
+                // Generamos dimensiones estándar
+                const dimensions = getStandardDimensions();
+                const randomWidth = dimensions.width;
+                const randomHeight = dimensions.height;
+                
+                // Mostramos un mensaje de carga 
+                dimensionesElement.textContent = `Cargando nueva imagen de ${randomWidth}x${randomHeight}...`;
+                
+                // Creamos un nuevo objeto de imagen para precargar
+                const nuevaImagen = new Image();
+                
+                nuevaImagen.onload = function() {
+                    // Una vez cargada, actualizamos la imagen visible
+                    imagenGato.src = nuevaImagen.src;
+                    imagenGato.width = randomWidth;
+                    imagenGato.height = randomHeight;
+                    
+                    // Actualizamos el mensaje con las dimensiones
+                    dimensionesElement.textContent = `Dimensiones actuales: ${randomWidth}x${randomHeight}`;
+                    
+                    // Permitimos nuevos cambios
+                    isChanging = false;
+                };
+                
+                nuevaImagen.onerror = function() {
+                    // En caso de error al cargar, intentamos con https en lugar de http
+                    dimensionesElement.textContent = 'Error al cargar la imagen. Intentando con otra fuente...';
+                    
+                    // Cambiamos a otra fuente de imágenes (cataas.com)
+                    nuevaImagen.src = "https://cataas.com/cat?width=" + randomWidth + "&height=" + randomHeight + "&t=" + Date.now();
+                };
+                
+                // Iniciamos la carga con una fuente alternativa - https://thecatapi.com
+                // También añadimos un timestamp para evitar la caché
+                nuevaImagen.src = `https://cataas.com/cat?width=${randomWidth}&height=${randomHeight}&t=${Date.now()}`;
+            }
+            
+            // Escuchamos el evento mouseenter
+            imagenGato.addEventListener('mouseenter', actualizarImagen);
+            
+            // Añadimos un mensaje inicial
+            dimensionesElement.textContent = 'Pasa el cursor sobre la imagen para cambiar su tamaño.';
+        </script>
+</div>
+<div>
+    <h3>
+        Basando a la actividad, podemos sacar esta conclusiones
+        1. ChatGPT ayuda a hacer codigos rapidos y entender conceptos y Copilot autocompleta codigos mientras se programa,
+        pero estos codigos no son perfectos y se debe revisar y corregir.
+        2. ChatGPT se usa de manera mas efectiva en los siguiente;
+        - Preguntas DOM y eventos.
+        - Generar codigo desde cero con explicaciones.
+        Copilot se usa mas en;
+        - Completar codigo.
+        - Escribir codigo de manera mas rapida.
+        3. Las ventajas de usar la IA son que te ahorra muchisimo tiempo y proporciona soluciones rápidas.
+        4. Las desventajas de usar la IA son que no siempre proporciona la solución correcta y puede ser confuso.
+    </h3>
+</div>
+
+</body>
+</html>
